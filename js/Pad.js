@@ -41,7 +41,8 @@ Pad.prototype.setSourceURL = function() {
 	this.sampleS3URL = this.s3Prefix + this.sampleS3_key;
 
 	this.sample.source = this.sampleS3URL;
-	this.addAudioProperties();
+
+    this.loadAudio(this.sample, this.sample.source);
 
 	//console.log(this.sampleS3URL);
 };
@@ -66,6 +67,10 @@ Pad.prototype.clicked = function(This) {
 	This.sample.play();
 };
 
+Pad.prototype.stop = function() {
+	this.sample.stop();
+};
+
 Pad.prototype.loadAudio = function( object, url) {
 	var _this = this;
     var request = new XMLHttpRequest();
@@ -77,6 +82,8 @@ Pad.prototype.loadAudio = function( object, url) {
 	        _this.context.decodeAudioData(request.response, function(buffer) {
 	            _this.sample.buffer = buffer;
 	            //console.log(_this.sample);
+
+				_this.addAudioProperties();
 	        });
 
 	        _this.activate();
@@ -89,16 +96,35 @@ Pad.prototype.loadAudio = function( object, url) {
 
 Pad.prototype.addAudioProperties = function() {
 	var _this = this;
-	//this.sample.name = this.sample.id;
-    this.loadAudio(this.sample, this.sample.source);
+
     this.sample.play = function () {
-        var s = _this.context.createBufferSource();
-        s.buffer = _this.sample.buffer;
-        s.connect(_this.context.destination);
+    	var s = _this.context.createBufferSource();
+    	s.buffer = _this.sample.buffer;
+    	s.connect(_this.context.destination);
+    	_this.sample.s = s;
         s.start(0);
-        _this.sample.s = s;
+        _this.playing();
+
+		s.onended = function() {
+	    	_this.activate();
+	    }
     }
 
+    this.sample.stop = function() {
+    	s.stop();
+    }
+
+};
+
+Pad.prototype.playing = function() {
+
+	this.$el.off('click', function(){
+		_this.clicked(_this);
+	});
+
+	this.$el.css({
+		'background-color': '#889900'
+	});
 }
 
 Pad.prototype.activate = function() {
@@ -110,7 +136,7 @@ Pad.prototype.activate = function() {
 	});
 
 	this.$el.css({
-		'background-color': '#FF9900'
+		'background-color': '#FFAA00'
 	});
 };
 
@@ -122,7 +148,7 @@ Pad.prototype.deactivate = function() {
 	});
 
 	this.$el.css({
-		'background-color': '#FFCB17'
+		'background-color': '#FF3300'
 	});
 };
 
