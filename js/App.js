@@ -9,11 +9,15 @@ function App(){
 		gridLeft: 0
 	};
 
-	this.$pads = $("#controls");
-	this.padController = new Controls(this.$pads, this.window);
-
 	this.$pads = $("#pads");
 	this.padController = new PadController(this.$pads, this.window);
+
+	this.controllers = {
+		'padController': this.padController
+	}
+
+	this.$pads = $("#controls");
+	this.controls = new Controls(this.$pads, this.window, this.controllers);
 }
 
 App.prototype.bindWindowResize = function(){
