@@ -7,6 +7,7 @@ class Scraper
   def initialize(instrument_name)
     @instrument = formatted_for_api(instrument_name)
     @instrument_file_name = formatted_for_filename(instrument_name)
+    binding.pry
     @api_endpoint = "http://hackathon.indabamusic.com/samples?instruments=#{@instrument}&per_page=99999"
     @text_file = File.new(File.expand_path("../data/ids/#{@instrument_file_name}.txt", File.dirname(__FILE__)), 'w')
   end
@@ -18,7 +19,7 @@ class Scraper
       instrument_name_array = instrument_name_array.map {|word| word.capitalize}.join(' ')
       URI.escape(instrument_name_array)
     else
-      instrument_name_array.first
+      instrument_name_array.first.capitalize
     end
   end
 
