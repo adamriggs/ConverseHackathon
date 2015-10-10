@@ -7,7 +7,7 @@ function PadController($El, Window) {
 	this.padCount = 0;
 	this.padArray = [];
 
-	//this.setPadCount();
+	this.setPadCount();
 
 };
 
@@ -19,9 +19,16 @@ PadController.prototype.setPadCount = function() {
 
 PadController.prototype.drawPads = function() {
 	console.log("PadController.drawPads()");
+
+	this.$el.empty();
+
 	for(var i = 0; i < this.padCount; i++) {
-		this.padArray.push(new Pad());
+		var pad = new Pad(this.window);
+		this.padArray.push(pad);
+		this.$el.append(pad.$el);
 	}
+
+	this.handleWindowResize();
 
 };
 
