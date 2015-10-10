@@ -1,8 +1,11 @@
 "use strict"
 
-function PadController($El, Window) {
+function PadController($El, Window, Samples) {
 	this.$el = $El;
 	this.window = Window;
+	this.sampleController = Samples;
+
+	//console.log(this.sampleController.samples);
 
 	this.padCount = 0;
 	this.padArray = [];
@@ -26,6 +29,7 @@ PadController.prototype.drawPads = function() {
 		var pad = new Pad(this.window);
 		this.padArray.push(pad);
 		this.$el.append(pad.$el);
+		pad.setSampleID(this.sampleController.samples[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples[0])]);
 	}
 
 	this.handleWindowResize();

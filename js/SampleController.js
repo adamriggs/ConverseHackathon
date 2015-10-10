@@ -1,34 +1,42 @@
 "use strict"
 
-function SampleController($El, Window) {
-	this.$el = $El;
-	this.window = Window;
+function SampleController() {
 
-	this.filePrefix = "file://data/";
-	this.fileSuffix = ".txt";
+	this.bass = this.getRandomValueFromArray(GLOBAL_VARS.samples.bass);
+	this.drums = this.getRandomValueFromArray(GLOBAL_VARS.samples.drums);
+	this.guitar = this.getRandomValueFromArray(GLOBAL_VARS.samples.guitar);
+	this.hornsAndReeds = this.getRandomValueFromArray(GLOBAL_VARS.samples.hornsAndReeds);
 
-	//this.bassIDs = this.readTextFile("Bass");
-	
+	// console.log(this.bass);
+	// console.log(this.drums);
+	// console.log(this.guitar);
+	// console.log(this.hornsAndReeds);
+
+	this.samples = [];
+	this.initSamples();
 };
 
-SampleController.prototype.readTextFile = function(file) {
-	var file = this.filePrefix + file + this.fileSuffix;
+SampleController.prototype.initSamples = function() {
+	console.log("SampleController.initSamples()");
 
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                console.log(allText);
-            }
-        }
-    }
-    rawFile.send(null);
+	var size = 0;
+
+	for(var key in GLOBAL_VARS.samples){
+		if (GLOBAL_VARS.samples.hasOwnProperty(key)) size++;
+		this.samples.push(GLOBAL_VARS.samples[key]);
+	}
+
+	// for(var i = 0; i < size; i++){
+	// 	console.log(i);
+	// 	this.samples.push(GLOBAL_VARS.samples[i]);
+	// }
 };
+
+SampleController.prototype.getRandomValueFromArray = function(Arr){
+	//console.log(Arr.length);
+	return Math.floor(Math.random() * Arr.length);
+}
+
 
 SampleController.prototype.handleWindowResize = function() {
 	

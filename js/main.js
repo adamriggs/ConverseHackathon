@@ -3,7 +3,12 @@
 var GLOBAL_VARS = {
 	audioContext: {},
 	padCount: 4,
-
+	samples: {
+		bass: bass,
+		drums: drums,
+		guitar: guitar,
+		hornsAndReeds: hornsAndReeds
+	}
 };
 
 var app;

@@ -17,8 +17,8 @@ function Controls($El, Window, Controllers){
 
 Controls.prototype.updatePadCount = function(This) {
 	console.log("Controls.updatePadCount()");
-	console.log(This.$padCount);
-	console.log(This.$padCount.val());
+	//console.log(This.$padCount);
+	//console.log(This.$padCount.val());
 	GLOBAL_VARS.padCount = This.$padCount.val();
 	This.controllers.padController.setPadCount();
 };

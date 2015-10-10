@@ -11,10 +11,11 @@ function App(){
 
 	GLOBAL_VARS.audioContext = new AudioContext();
 
-	this.$pads = $("#pads");
-	this.padController = new PadController(this.$pads, this.window);
 
 	this.sampleController = new SampleController();
+
+	this.$pads = $("#pads");
+	this.padController = new PadController(this.$pads, this.window, this.sampleController);
 
 	this.controllers = {
 		'padController': this.padController,

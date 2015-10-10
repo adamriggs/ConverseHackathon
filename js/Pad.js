@@ -23,11 +23,12 @@ function Pad(Window) {
 
 	this.s3Prefix = "https://d34x6xks9kc6p2.cloudfront.net/";
 
-	this.setSampleID('542ad5f4e4b0f0e47d33a7d8');
+	//this.setSampleID('542ad5f4e4b0f0e47d33a7d8');
 	//this.addAudioProperties();
 };
 
 Pad.prototype.setSampleID = function(ID) {
+	//console.log("Pad.setSampleID(" + ID + ")");
 	this.sample = {};
 	this.deactivate();
 	this.sampleID = ID;
@@ -73,12 +74,16 @@ Pad.prototype.loadAudio = function( object, url) {
     request.responseType = 'arraybuffer';
 
     request.onload = function() {
-        _this.context.decodeAudioData(request.response, function(buffer) {
-            _this.sample.buffer = buffer;
-            //console.log(_this.sample);
-        });
+    	if(request.status==200) {
+	        _this.context.decodeAudioData(request.response, function(buffer) {
+	            _this.sample.buffer = buffer;
+	            //console.log(_this.sample);
+	        });
 
-        _this.activate();
+	        _this.activate();
+    	} else {
+    		console.log(request.status);
+    	}
     }
     request.send();
 };
