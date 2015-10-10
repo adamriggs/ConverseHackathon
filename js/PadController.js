@@ -29,7 +29,7 @@ PadController.prototype.drawPads = function() {
 		var pad = new Pad(this.window);
 		this.padArray.push(pad);
 		this.$el.append(pad.$el);
-		pad.setSampleID(this.sampleController.samples[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples[0])]);
+		pad.setSampleID(this.sampleController.samples.one_shot[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples.one_shot[0])]);
 	}
 
 	this.handleWindowResize();
