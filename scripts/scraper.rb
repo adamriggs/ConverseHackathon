@@ -1,13 +1,35 @@
 require 'json'
 require 'curb'
+require 'uri'
 require 'pry'
 
 class Scraper
   def initialize(instrument_name)
-    @instrument = instrument_name
-    @instrument_file_name = instrument_name.downcase
-    @api_endpoint = "http://hackathon.indabamusic.com/samples?instruments=#{instrument_name}&per_page=99999"
+    @instrument = formatted_for_api(instrument_name)
+    @instrument_file_name = formatted_for_filename(instrument_name)
+    @api_endpoint = "http://hackathon.indabamusic.com/samples?instruments=#{@instrument}&per_page=99999"
     @text_file = File.new(File.expand_path("../data/ids/#{@instrument_file_name}.txt", File.dirname(__FILE__)), 'w')
+  end
+
+  def formatted_for_api(instrument_name)
+    instrument_name_array = instrument_name.downcase.split(' ')
+
+    if (instrument_name_array.length > 1)
+      instrument_name_array = instrument_name_array.map {|word| word.capitalize}.join(' ')
+      URI.escape(instrument_name_array)
+    else
+      instrument_name_array.first
+    end
+  end
+
+  def formatted_for_filename(instrument_name)
+    instrument_name_array = instrument_name.downcase.split(' ')
+
+    if (instrument_name_array.length > 1)
+      instrument_name_array.join('_')
+    else
+      instrument_name_array.first
+    end
   end
 
   def get_json_data
@@ -36,6 +58,5 @@ end
 
 puts 'Input instrument name to scrape ids from:'
 json_file_name = gets.chomp
-json_file_name = json_file_name.capitalize
 scraper = Scraper.new(json_file_name)
 scraper.get_json_data
