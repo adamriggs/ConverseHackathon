@@ -19,6 +19,7 @@ function Pad(Window) {
 	this.sampleS3URL = "";
 
 	this.isPlaying = false;
+	this.playAgain = false;
 
 
 	this.apiPrefix = "https://hackathon.indabamusic.com/samples/";
@@ -68,12 +69,16 @@ Pad.prototype.getSampleJSON = function() {
 Pad.prototype.clicked = function(This) {
 	//console.log("Pad.clicked()");
 	//console.log("isPlaying=="+This.isPlaying)
-
-	This.play();
-
+	if(This.isPlaying==false){
+		This.play();
+	} else {
+		This.stop();
+		This.playAgain=true;
+	}
 };
 
 Pad.prototype.play = function() {
+	//console.log("Pad.play()");
 	this.sample.play();
 }
 
@@ -116,7 +121,7 @@ Pad.prototype.addAudioProperties = function() {
 	var _this = this;
 
     this.sample.play = function() {
-    	//if(_this.isPlaying==false) {
+    	if(_this.isPlaying==false) {
 
 	    	//console.log("this.sample.play()");
 
@@ -127,24 +132,28 @@ Pad.prototype.addAudioProperties = function() {
 	    	_this.bufferSourceNodes.push(s);
 	        _this.playStart(_this);
 
-		    //_this.isPlaying=true;
+		    _this.isPlaying=true;
 
 			s.onended = function() {
 				//console.log("s.onended()");
 		    	_this.bufferSourceNodes.shift();
 		    	_this.playStop(_this);
-		    	//_this.isPlaying=false;
+		    	_this.isPlaying=false;
+		    	if(_this.playAgain==true){
+		    		_this.playAgain=false;
+		    		_this.sample.play();
+		    	}
 		    }
-		//}
+		}
     }
 
     this.sample.stop = function() {
-    	//if(_this.isPlaying==true) {
+    	if(_this.isPlaying==true) {
 	    	//console.log("this.sample.stop()");
 	    	_this.sample.s.stop();
 		    _this.playStop(_this);
-	    	//_this.isPlaying=false;
-    	//}
+	    	_this.isPlaying=false;
+    	}
 
     }
 
