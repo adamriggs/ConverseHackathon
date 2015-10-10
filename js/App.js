@@ -14,8 +14,11 @@ function App(){
 	this.$pads = $("#pads");
 	this.padController = new PadController(this.$pads, this.window);
 
+	this.sampleController = new SampleController();
+
 	this.controllers = {
-		'padController': this.padController
+		'padController': this.padController,
+		'sampleController': this.sampleController
 	}
 
 	this.$pads = $("#controls");

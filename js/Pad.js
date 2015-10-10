@@ -6,20 +6,59 @@ function Pad(Window) {
 	var _this = this;
 
 	this.$el = $("<div class='pad'></div>");
-	this.$el.on('click', function(){
-		_this.clicked(_this);
-	});
 
 	this.test = "test";
 	this.context = GLOBAL_VARS.audioContext;
 	this.sample = {};
 	this.sample.source = "http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409274kick.wav";
 
-	//console.log(this.$el);
+	this.sampleID = "";
+	this.sampleURL = "";
+	this.sampleJSON = "";
+	this.sampleS3_key = "";
+	this.sampleS3URL = "";
 
-	//this.loadAudio(this.sample, "http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409274kick.wav");
+
+	this.apiPrefix = "https://hackathon.indabamusic.com/samples/";
+
+	this.s3Prefix = "https://d34x6xks9kc6p2.cloudfront.net/";
+
+	this.setSampleID('542ad5f4e4b0f0e47d33a7d8');
+	//this.addAudioProperties();
+};
+
+Pad.prototype.setSampleID = function(ID) {
+	this.sample = {};
+	this.deactivate();
+	this.sampleID = ID;
+	this.sampleURL = this.apiPrefix + this.sampleID;
+	//console.log(this.sampleURL);
+
+	this.getSampleJSON();
+};
+
+Pad.prototype.setSourceURL = function() {
+	this.sampleS3URL = this.s3Prefix + this.sampleS3_key;
+
+	this.sample.source = this.sampleS3URL;
 	this.addAudioProperties();
-	//console.log("sample==", this.sample);
+
+	//console.log(this.sampleS3URL);
+};
+
+Pad.prototype.getSampleJSON = function() {
+	//console.log("Pad.getSampleJSON()");
+	var _this = this;
+	var request = new XMLHttpRequest();
+    request.open('GET', this.sampleURL, true);
+
+    request.onload = function() {
+        _this.sampleJSON = JSON.parse(request.response);
+        _this.sampleS3_key = _this.sampleJSON.s3_key;
+        _this.sampleS3_key = _this.sampleS3_key.replace(".wav", ".mp3");
+        _this.setSourceURL();
+    }
+    request.send();
 };
 
 Pad.prototype.clicked = function(This) {
@@ -60,12 +99,24 @@ Pad.prototype.addAudioProperties = function() {
 
 Pad.prototype.activate = function() {
 	//console.log("Pad.activate()");
+	var _this = this;
+
+	this.$el.on('click', function(){
+		_this.clicked(_this);
+	});
+
 	this.$el.css({
 		'background-color': '#FF9900'
 	});
 };
 
 Pad.prototype.deactivate = function() {
+	var _this = this;
+
+	this.$el.off('click', function(){
+		_this.clicked(_this);
+	});
+
 	this.$el.css({
 		'background-color': '#FFCB17'
 	});
