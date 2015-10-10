@@ -10,6 +10,7 @@ function Pad(Window) {
 	this.context = GLOBAL_VARS.audioContext;
 	this.sample = {};
 	this.sample.source = "";
+	this.bufferSourceNodes = [];
 
 	this.sampleID = "";
 	this.sampleURL = "";
@@ -66,7 +67,10 @@ Pad.prototype.getSampleJSON = function() {
 
 Pad.prototype.clicked = function(This) {
 	//console.log("Pad.clicked()");
+	//console.log("isPlaying=="+This.isPlaying)
+	
 	This.play();
+	
 };
 
 Pad.prototype.play = function() {
@@ -74,7 +78,15 @@ Pad.prototype.play = function() {
 }
 
 Pad.prototype.stop = function() {
-	this.sample.s.stop();
+	//console.log("Pad.stop()");
+	for(var i = 0; i < this.bufferSourceNodes.length; i++){
+		try{
+			this.bufferSourceNodes[i].stop();
+		}
+		catch(err){
+			console.log(err);
+		}
+	}
 };
 
 Pad.prototype.loadAudio = function( object, url) {
@@ -103,51 +115,55 @@ Pad.prototype.loadAudio = function( object, url) {
 Pad.prototype.addAudioProperties = function() {
 	var _this = this;
 
-    this.sample.play = function () {
-    	if(_this.isPlaying==false) {
+    this.sample.play = function() {
+    	//if(_this.isPlaying==false) {
 
 	    	//console.log("this.sample.play()");
+
 	    	var s = _this.context.createBufferSource();
 	    	s.buffer = _this.sample.buffer;
 	    	s.connect(_this.context.destination);
-	    	_this.sample.s = s;
 	        s.start(0);
-	        _this.playing(_this);
+	    	_this.bufferSourceNodes.push(s);
+	        _this.playStart(_this);
+
+		    //_this.isPlaying=true;
 
 			s.onended = function() {
-		    	_this.activate(_this);
-		    	_this.isPlaying=false;
+				//console.log("s.onended()");
+		    	_this.bufferSourceNodes.shift();
+		    	_this.playStop(_this);
+		    	//_this.isPlaying=false;
 		    }
-
-		    _this.isPlaying=true;
-		}
+		//}
     }
 
     this.sample.stop = function() {
-    	if(_this.isPlaying==true) {
+    	//if(_this.isPlaying==true) {
 	    	//console.log("this.sample.stop()");
 	    	_this.sample.s.stop();
-	    	_this.isPlaying=false;
-    	}
+		    _this.playStop(_this);
+	    	//_this.isPlaying=false;
+    	//}
 
     }
 
 };
 
-Pad.prototype.playing = function(_this) {
-
-	// this.$el.off('click', function(){
-	// 	_this.clicked(_this);
-	// });
-
-	// _this.$el.on('click', function(){
-	// 	_this.stop();
-	// });
+Pad.prototype.playStart = function(_this) {
 
 	_this.$el.css({
 		'background-color': '#889900'
 	});
-}
+};
+
+Pad.prototype.playStop = function(_this) {
+	if(_this.bufferSourceNodes.length==0){
+		_this.$el.css({
+			'background-color': '#FFAA00'
+		});
+	}
+};
 
 Pad.prototype.activate = function(_this) {
 	//console.log("Pad.activate()");
