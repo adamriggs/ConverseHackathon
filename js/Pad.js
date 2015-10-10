@@ -5,7 +5,7 @@ function Pad(Window) {
 
 	var _this = this;
 
-	this.$el = $("<div class='pad'></div>");
+	this.$el = $("<div class='pad not-loaded'></div>");
 
 	this.context = GLOBAL_VARS.audioContext;
 	this.sample = {};
@@ -68,9 +68,9 @@ Pad.prototype.getSampleJSON = function() {
 Pad.prototype.clicked = function(This) {
 	//console.log("Pad.clicked()");
 	//console.log("isPlaying=="+This.isPlaying)
-	
+
 	This.play();
-	
+
 };
 
 Pad.prototype.play = function() {
@@ -151,17 +151,12 @@ Pad.prototype.addAudioProperties = function() {
 };
 
 Pad.prototype.playStart = function(_this) {
-
-	_this.$el.css({
-		'background-color': '#889900'
-	});
+  _this.$el.addClass('playing');
 };
 
 Pad.prototype.playStop = function(_this) {
 	if(_this.bufferSourceNodes.length==0){
-		_this.$el.css({
-			'background-color': '#FFAA00'
-		});
+    _this.$el.removeClass('playing');
 	}
 };
 
@@ -177,9 +172,7 @@ Pad.prototype.activate = function(_this) {
 		_this.clicked(_this);
 	});
 
-	this.$el.css({
-		'background-color': '#FFAA00'
-	});
+	this.$el.removeClass('not-loaded');
 };
 
 Pad.prototype.deactivate = function() {
@@ -188,12 +181,8 @@ Pad.prototype.deactivate = function() {
 	_this.$el.off('click', function(){
 		_this.clicked(_this);
 	});
-
-	_this.$el.css({
-		'background-color': '#FF3300'
-	});
 };
 
 Pad.prototype.handleWindowResize = function() {
-	
+
 };
