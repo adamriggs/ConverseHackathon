@@ -7,10 +7,9 @@ function Pad(Window) {
 
 	this.$el = $("<div class='pad'></div>");
 
-	this.test = "test";
 	this.context = GLOBAL_VARS.audioContext;
 	this.sample = {};
-	this.sample.source = "http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409274kick.wav";
+	this.sample.source = "";
 
 	this.sampleID = "";
 	this.sampleURL = "";
