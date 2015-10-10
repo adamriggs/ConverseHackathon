@@ -15,7 +15,6 @@ function Controls($El, Window, Controllers){
 
 	this.$stopAll = this.$el.find("> .stop_all");
 	this.$stopAll.on('click', function(){_this.stopAll(_this);});
-	
 };
 
 Controls.prototype.updatePadCount = function(This) {
@@ -32,5 +31,5 @@ Controls.prototype.stopAll = function(This) {
 };
 
 Controls.prototype.handleWindowResize = function(){
-	
+
 };

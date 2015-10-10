@@ -14,10 +14,11 @@ function App(){
 
 	this.sampleController = new SampleController();
 
-	this.$pads = $("#pads");
-	this.padController = new PadController(this.$pads, this.window, this.sampleController);
+	this.$loopPads = $("#loop-pads");
+	this.$oneShotPads = $("#one-shot-pads");
+	this.padController = new PadController(this.$loopPads, this.$oneShotPads, this.window, this.sampleController);
 
-	this.keyboardController = new KeyboardController(this.$pads, this.padController);
+	this.keyboardController = new KeyboardController(this.padController);
 
 	this.controllers = {
 		'padController': this.padController,
