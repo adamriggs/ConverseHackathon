@@ -79,12 +79,12 @@ Pad.prototype.clicked = function(This) {
 };
 
 Pad.prototype.play = function() {
-	console.log("Pad.play()");
+	//console.log("Pad.play()");
 	this.sample.play();
 }
 
 Pad.prototype.stop = function() {
-	console.log("Pad.stop()");
+	//console.log("Pad.stop()");
 	for(var i = 0; i < this.bufferSourceNodes.length; i++){
 		try{
 			this.bufferSourceNodes[i].stop();
@@ -124,7 +124,7 @@ Pad.prototype.addAudioProperties = function() {
     this.sample.play = function() {
     	if(_this.isPlaying==false) {
 
-	    	console.log("this.sample.play()");
+	    	//console.log("this.sample.play()");
 
 	    	var s = _this.context.createBufferSource();
 	    	s.buffer = _this.sample.buffer;
@@ -136,7 +136,7 @@ Pad.prototype.addAudioProperties = function() {
 		    _this.isPlaying=true;
 
 			s.onended = function() {
-				console.log("s.onended()");
+				//console.log("s.onended()");
 		    	_this.bufferSourceNodes.shift();
 		    	_this.playStop(_this);
 		    	_this.isPlaying=false;
@@ -150,7 +150,7 @@ Pad.prototype.addAudioProperties = function() {
 
     this.sample.stop = function() {
     	if(_this.isPlaying==true) {
-	    	console.log("this.sample.stop()");
+	    	//console.log("this.sample.stop()");
 	    	_this.sample.s.stop();
 		    _this.playStop(_this);
 	    	_this.isPlaying=false;
