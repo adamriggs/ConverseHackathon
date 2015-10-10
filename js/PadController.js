@@ -37,7 +37,7 @@ PadController.prototype.drawPads = function() {
 };
 
 PadController.prototype.stopAll = function() {
-	console.log("PadController.stopAll()");
+	//console.log("PadController.stopAll()");
 	for(var i = 0; i < this.padCount; i++) {
 		this.padArray[i].stop();
 	}
