@@ -1,7 +1,6 @@
 "use strict";
 
-function KeyboardController($pads, padController) {
-  this.$pads = $pads;
+function KeyboardController(padController) {
   this.padController = padController;
   this.loopKeyCodes = {
     // browser key code: [keyboard key, element in pad array]
@@ -29,16 +28,23 @@ function KeyboardController($pads, padController) {
     80: ['p', 15],
   };
 
-  this.assignKeyUpEventToOneShotPads();
+  this.handleKeyUpEvents();
 }
 
-KeyboardController.prototype.assignKeyUpEventToOneShotPads = function() {
+KeyboardController.prototype.handleKeyUpEvents = function() {
   var _this = this;
 
   $(document).on('keyup', function(event) {
+    if (_this.loopKeyCodes[event.keyCode]) {
+      var padElement = _this.loopKeyCodes[event.keyCode][1];
+      _this.padController.loopPadArray[padElement].play();
+
+      return false;
+    }
+
     if (_this.oneShotKeyCodes[event.keyCode]) {
       var padElement = _this.oneShotKeyCodes[event.keyCode][1];
-      _this.padController.padArray[padElement].play();
+      _this.padController.oneShotPadArray[padElement].play();
 
       return false;
     }

@@ -1,14 +1,17 @@
 "use strict"
 
-function PadController($El, Window, Samples) {
-	this.$el = $El;
+function PadController($loopEl, $oneShotEl, Window, Samples) {
+	this.$loopEl = $loopEl;
+	this.$oneShotEl = $oneShotEl;
 	this.window = Window;
 	this.sampleController = Samples;
 
 	//console.log(this.sampleController.samples);
 
-	this.padCount = 0;
-	this.padArray = [];
+	this.loopPadCount = 0;
+	this.loopPadArray = [];
+	this.oneShotPadCount = 0;
+	this.oneShotPadArray = [];
 
 	this.setPadCount();
 
@@ -16,19 +19,37 @@ function PadController($El, Window, Samples) {
 
 PadController.prototype.setPadCount = function() {
 	console.log("PadController.setPadCount()");
-	this.padCount = GLOBAL_VARS.padCount;
-	this.drawPads();
+	this.loopPadCount = GLOBAL_VARS.loopPadCount;
+	this.oneShotPadCount = GLOBAL_VARS.oneShotPadCount;
+	this.drawLoopPads();
+	this.drawOneShotPads();
 };
 
-PadController.prototype.drawPads = function() {
+PadController.prototype.drawLoopPads = function() {
 	console.log("PadController.drawPads()");
 
-	this.$el.empty();
+	this.$loopEl.empty();
 
-	for(var i = 0; i < this.padCount; i++) {
+	for(var i = 0; i < this.loopPadCount; i++) {
 		var pad = new Pad(this.window);
-		this.padArray.push(pad);
-		this.$el.append(pad.$el);
+		this.loopPadArray.push(pad);
+		this.$loopEl.append(pad.$el);
+		pad.setSampleID(this.sampleController.samples.loop[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples.loop[0])]);
+	}
+
+	this.handleWindowResize();
+
+};
+
+PadController.prototype.drawOneShotPads = function() {
+	console.log("PadController.drawPads()");
+
+	this.$oneShotEl.empty();
+
+	for(var i = 0; i < this.oneShotPadCount; i++) {
+		var pad = new Pad(this.window);
+		this.oneShotPadArray.push(pad);
+		this.$oneShotEl.append(pad.$el);
 		pad.setSampleID(this.sampleController.samples.one_shot[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples.one_shot[0])]);
 	}
 

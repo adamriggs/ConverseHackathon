@@ -12,7 +12,7 @@ function Controls($El, Window, Controllers){
 	this.$padCount.change(function(){
 		This.updatePadCount(This);
 	});
-	
+
 };
 
 Controls.prototype.updatePadCount = function(This) {
@@ -24,5 +24,5 @@ Controls.prototype.updatePadCount = function(This) {
 };
 
 Controls.prototype.handleWindowResize = function(){
-	
+
 };

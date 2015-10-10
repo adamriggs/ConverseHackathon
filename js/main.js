@@ -2,7 +2,8 @@
 
 var GLOBAL_VARS = {
 	audioContext: {},
-	padCount: 4,
+	loopPadCount: 4,
+  oneShotPadCount: 16,
 	samples: {
 		all: {
 			bass_all: bass_all,
