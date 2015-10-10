@@ -1,0 +1,88 @@
+/*------------------reset----------------------*/
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+  margin:0;
+  padding:0;
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+fieldset,img {
+  border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+  font-style:normal;
+  font-weight:normal;
+}
+ol,ul {
+  list-style:none;
+}
+caption,th {
+  text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-size:100%;
+  font-weight:normal;
+}
+q:before,q:after {
+  content:'';
+}
+abbr,acronym { border:0;
+}
+
+/*------------------html elements-----------------------*/
+
+/*html {
+	background: url("../img/city-with-brand.jpg") no-repeat center center fixed;
+	-webkit-background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-o-background-size: 100% auto;
+	background-size: 100% auto;
+}*/
+
+body {
+  font-family:Arial,sans-serif;
+  font-size:62.5%; 
+  background-attachment: fixed;
+}
+
+label,
+input,
+select,
+textarea {
+  font-family:Arial,sans-serif;
+}
+
+em {
+}
+
+hr {
+  
+}
+
+/*------------------id's-----------------------*/
+
+
+
+/*------------------specific classes-----------------------*/
+
+
+
+/*------------------generic classes-----------------------*/
+
+.clear {
+  clear:both;
+  font-size:0px;
+  height:0px;
+  line-height:0px;
+}
+
+.hide {
+  height:1px;
+  left:-9999em;
+  overflow:hidden;
+  position:absolute;
+  top:-9999em;
+  width:1px;
+}
