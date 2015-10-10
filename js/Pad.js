@@ -1,7 +1,7 @@
 "use strict"
 
 function Pad($El, Window){
-	this.$el = $EL;
+	this.$el = $El;
 	this.window = Window;
 	
 };

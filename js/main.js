@@ -1,6 +1,7 @@
 "use strict"
 
 var GLOBAL_VARS = {
+	padCount: 0,
 
 };
 

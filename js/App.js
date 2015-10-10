@@ -8,6 +8,12 @@ function App(){
 		width: 0,
 		gridLeft: 0
 	};
+
+	this.$pads = $("#controls");
+	this.padController = new Controls(this.$pads, this.window);
+
+	this.$pads = $("#pads");
+	this.padController = new PadController(this.$pads, this.window);
 }
 
 App.prototype.bindWindowResize = function(){
@@ -42,4 +48,6 @@ App.prototype.setHandleWindowResizeTimeout = function(){
 App.prototype.handleWindowResize = function(){
 	this.window.width = window.outerWidth && window.outerWidth > this.window.$el.width() ? window.outerWidth : this.window.$el.width();
 	this.window.height = this.window.$el.height();
+
+	this.padController.handleWindowResize();
 }
