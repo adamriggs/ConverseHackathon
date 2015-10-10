@@ -1,13 +1,11 @@
-### Getting sample JSON data
+### Getting and scraping IDs from sample JSON data
 
-Make a curl request and save it the response to a text file
-
-    curl http://hackathon.indabamusic.com/samples\?instruments\=Drums\&\per_page\=99999 > data/json/drums.json
-
-### Scraping IDs from JSON data
-
-Run `scraper.rb` and input the name of the json file without the .json extension
+Run `scraper.rb` and input the name of the instrument (this is used as the argument for the api endpoint 'instrument' parameter)
 
     ruby scripts/scraper.rb
-    Input json file to scrape ids from (do not include .json extension):
+    Input instrument name to scrape ids from:
     > bass
+
+### Notes to self
+
+- Maybe differentiate between one shot and looped samples? API filter &type=one_shot && &type=loop
