@@ -36,6 +36,13 @@ PadController.prototype.drawPads = function() {
 
 };
 
+PadController.prototype.stopAll = function() {
+	console.log("PadController.stopAll()");
+	for(var i = 0; i < this.padCount; i++) {
+		this.padArray[i].stop();
+	}
+};
+
 PadController.prototype.handleWindowResize = function() {
 
 	for(var i = 0; i < this.padCount; i++) {
