@@ -21,7 +21,7 @@ class Scraper
   end
 end
 
-puts 'Input json file to scrape ids from (do not include .json extension):'
+puts 'Input json file name to scrape ids from (do not include .json extension):'
 json_file_name = gets.chomp
 scraper = Scraper.new(json_file_name)
 scraper.write_ids_to_file
