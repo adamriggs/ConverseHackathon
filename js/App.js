@@ -9,6 +9,8 @@ function App(){
 		gridLeft: 0
 	};
 
+	GLOBAL_VARS.audioContext = new AudioContext();
+
 	this.$pads = $("#pads");
 	this.padController = new PadController(this.$pads, this.window);
 
