@@ -17,6 +17,8 @@ function Pad(Window) {
 	this.sampleS3_key = "";
 	this.sampleS3URL = "";
 
+	this.isPlaying = false;
+
 
 	this.apiPrefix = "https://hackathon.indabamusic.com/samples/";
 
@@ -41,7 +43,8 @@ Pad.prototype.setSourceURL = function() {
 	this.sampleS3URL = this.s3Prefix + this.sampleS3_key;
 
 	this.sample.source = this.sampleS3URL;
-	this.addAudioProperties();
+
+    this.loadAudio(this.sample, this.sample.source);
 
 	//console.log(this.sampleS3URL);
 };
@@ -63,7 +66,15 @@ Pad.prototype.getSampleJSON = function() {
 
 Pad.prototype.clicked = function(This) {
 	//console.log("Pad.clicked()");
-	This.sample.play();
+	This.play();
+};
+
+Pad.prototype.play = function() {
+	this.sample.play();
+}
+
+Pad.prototype.stop = function() {
+	this.sample.s.stop();
 };
 
 Pad.prototype.loadAudio = function( object, url) {
@@ -77,6 +88,8 @@ Pad.prototype.loadAudio = function( object, url) {
 	        _this.context.decodeAudioData(request.response, function(buffer) {
 	            _this.sample.buffer = buffer;
 	            //console.log(_this.sample);
+
+				_this.addAudioProperties();
 	        });
 
 	        _this.activate();
@@ -89,40 +102,79 @@ Pad.prototype.loadAudio = function( object, url) {
 
 Pad.prototype.addAudioProperties = function() {
 	var _this = this;
-	//this.sample.name = this.sample.id;
-    this.loadAudio(this.sample, this.sample.source);
+
     this.sample.play = function () {
-        var s = _this.context.createBufferSource();
-        s.buffer = _this.sample.buffer;
-        s.connect(_this.context.destination);
-        s.start(0);
-        _this.sample.s = s;
+    	if(_this.isPlaying==false) {
+
+	    	//console.log("this.sample.play()");
+	    	var s = _this.context.createBufferSource();
+	    	s.buffer = _this.sample.buffer;
+	    	s.connect(_this.context.destination);
+	    	_this.sample.s = s;
+	        s.start(0);
+	        _this.playing(_this);
+
+			s.onended = function() {
+		    	_this.activate(_this);
+		    	_this.isPlaying=false;
+		    }
+
+		    _this.isPlaying=true;
+		}
     }
 
+    this.sample.stop = function() {
+    	if(_this.isPlaying==true) {
+	    	//console.log("this.sample.stop()");
+	    	_this.sample.s.stop();
+	    	_this.isPlaying=false;
+    	}
+
+    }
+
+};
+
+Pad.prototype.playing = function(_this) {
+
+	// this.$el.off('click', function(){
+	// 	_this.clicked(_this);
+	// });
+
+	// _this.$el.on('click', function(){
+	// 	_this.stop();
+	// });
+
+	_this.$el.css({
+		'background-color': '#889900'
+	});
 }
 
-Pad.prototype.activate = function() {
+Pad.prototype.activate = function(_this) {
 	//console.log("Pad.activate()");
 	var _this = this;
 
-	this.$el.on('click', function(){
+	_this.$el.off('click', function(){
+		_this.stop();
+	});
+
+	_this.$el.on('click', function(){
 		_this.clicked(_this);
 	});
 
 	this.$el.css({
-		'background-color': '#FF9900'
+		'background-color': '#FFAA00'
 	});
 };
 
 Pad.prototype.deactivate = function() {
 	var _this = this;
 
-	this.$el.off('click', function(){
+	_this.$el.off('click', function(){
 		_this.clicked(_this);
 	});
 
-	this.$el.css({
-		'background-color': '#FFCB17'
+	_this.$el.css({
+		'background-color': '#FF3300'
 	});
 };
 
