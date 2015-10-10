@@ -7,9 +7,8 @@ class Scraper
   def initialize(instrument_name)
     @instrument = formatted_for_api(instrument_name)
     @instrument_file_name = formatted_for_filename(instrument_name)
-    binding.pry
     @api_endpoint = "http://hackathon.indabamusic.com/samples?instruments=#{@instrument}&per_page=99999"
-    @text_file = File.new(File.expand_path("../data/ids/#{@instrument_file_name}.txt", File.dirname(__FILE__)), 'w')
+    @text_file = File.new(File.expand_path("../data/ids/#{@instrument_file_name}.json", File.dirname(__FILE__)), 'w')
   end
 
   def formatted_for_api(instrument_name)
@@ -45,9 +44,13 @@ class Scraper
   end
 
   def write_ids_to_file(instrument_json)
+    File.open(@text_file, 'a') { |file| file.puts("[") }
+
     instrument_json.each do |sample|
-      File.open(@text_file, 'a') { |file| file.puts(sample['_id']) }
+      File.open(@text_file, 'a') { |file| file.puts("\"#{sample['_id']}\",") }
     end
+
+    File.open(@text_file, 'a') { |file| file.puts("]") }
 
     done_scraping
   end
