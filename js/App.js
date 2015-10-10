@@ -1,7 +1,7 @@
 "use strict"
 
 function App(){
-	
+
 	this.window = {
 		$el: $(window),
 		height: 0,
@@ -16,6 +16,8 @@ function App(){
 
 	this.$pads = $("#pads");
 	this.padController = new PadController(this.$pads, this.window, this.sampleController);
+
+	this.keyboardController = new KeyboardController(this.$pads, this.padController);
 
 	this.controllers = {
 		'padController': this.padController,
@@ -36,7 +38,7 @@ App.prototype.bindWindowResize = function(){
 		Evt.stopPropagation();
 		return false;
 	});
-	
+
 	this.window.$el.on("orientationchange", function(Evt) {
 	  _this.setHandleWindowResizeTimeout();
 	});
