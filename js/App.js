@@ -22,23 +22,23 @@ function App(){
 	var context = GLOBAL_VARS.audioContext;
 	context.listener.setPosition(0,0,0);
 	var panner = context.createPanner();
-	var centerX = WIDTH/2;
-	var centerY = HEIGHT/2;
-	var x = (X - centerX)  / WIDTH;
-	// The y coordinate is flipped to match the canvas coordinate space.
-	var y = (Y - centerY) / HEIGHT;
-	// Place the z coordinate slightly in behind the listener.
-	var z = -0.5;
-	// Tweak multiplier as necessary.
-	var scaleFactor = 2;
-	panner.setPosition(x * scaleFactor, y * scaleFactor, z);
-	//panner.setPosition(10, 10, 10);
-	// Convert angle into a unit vector.
+	// var centerX = WIDTH/2;
+	// var centerY = HEIGHT/2;
+	// var x = (X - centerX)  / WIDTH;
+	// // The y coordinate is flipped to match the canvas coordinate space.
+	// var y = (Y - centerY) / HEIGHT;
+	// // Place the z coordinate slightly in behind the listener.
+	// var z = -0.5;
+	// // Tweak multiplier as necessary.
+	// var scaleFactor = 2;
+	// panner.setPosition(x * scaleFactor, y * scaleFactor, z);
+	// //panner.setPosition(10, 10, 10);
+	// // Convert angle into a unit vector.
 	panner.setOrientation(Math.cos(angle), -Math.sin(angle), 1);
 
+	panner.connect(context.destination);
 	GLOBAL_VARS.panner = panner;
 
-	panner.connect(context.destination);
 
 
 	this.sampleController = new SampleController();
