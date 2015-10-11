@@ -34,9 +34,9 @@ LeapController.prototype.paramaterizeVector = function(Vect) {
 	//if(Vect[0]<0){Vect[0]=Vect[0]*-1;};
 	//if(Vect[1]<1){Vect[1]=Vect[1]*-1;};
 	if(Vect[2]<2){
-		if(Vect[2]>10){
-			Vect[2] = Vect[2]/10;
-		}
+		//if(Vect[2]>10){
+			Vect[2] = Vect[2]/100;
+		//}
 
 		//Vect[2]=Vect[2]/-10;
 	};
