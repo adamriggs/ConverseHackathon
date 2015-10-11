@@ -36,8 +36,10 @@ function App(){
 	// // Convert angle into a unit vector.
 	panner.setOrientation(Math.cos(angle), -Math.sin(angle), 1);
 
-	panner.connect(context.destination);
 	GLOBAL_VARS.panner = panner;
+	GLOBAL_VARS.gain = context.createGain();
+	//panner.connect(panner);
+	GLOBAL_VARS.gain.connect(context.destination);
 
 
 

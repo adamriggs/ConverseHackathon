@@ -3,10 +3,13 @@
 function LeapController() {
 	var context = GLOBAL_VARS.audioContext;
 	var panner = GLOBAL_VARS.panner;
+	var gain = GLOBAL_VARS.gain;
 	var hand, palmVect;
 	var _this = this;
 	var palmVect;
 	var angle = 0;
+
+	panner.connect(gain);
 
 	Leap.loop({}, function(frame){
 		//console.log("leap loop");
@@ -24,6 +27,8 @@ function LeapController() {
 
 				//panner.setOrientation(Math.cos(angle), -Math.sin(angle), 1);
 				//panner.connect(context.destination);
+
+				gain.gain.value = 300;
 			}
 		//}
 	});
