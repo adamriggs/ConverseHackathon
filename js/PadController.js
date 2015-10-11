@@ -31,7 +31,7 @@ PadController.prototype.drawLoopPads = function() {
 	this.$loopEl.empty();
 
 	for(var i = 0; i < this.loopPadCount; i++) {
-		var pad = new Pad(this.window);
+		var pad = new Pad(this.window, true);
 		this.loopPadArray.push(pad);
 		var hotkeyCharacter = this.getHotkeyCharacter(GLOBAL_VARS.loopPadCharacters[i]);
 		pad.$el.children('.hotkey-character').text(hotkeyCharacter);
@@ -49,7 +49,7 @@ PadController.prototype.drawOneShotPads = function() {
 	this.$oneShotEl.empty();
 
 	for(var i = 0; i < this.oneShotPadCount; i++) {
-		var pad = new Pad(this.window);
+		var pad = new Pad(this.window, false);
 		this.oneShotPadArray.push(pad);
 		var hotkeyCharacter = this.getHotkeyCharacter(GLOBAL_VARS.oneShotPadCharacters[i]);
 		pad.$el.children('.hotkey-character').text(hotkeyCharacter);

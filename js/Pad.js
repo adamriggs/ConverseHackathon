@@ -1,6 +1,6 @@
 "use strict"
 
-function Pad(Window) {
+function Pad(Window, loopEnabled) {
 	this.window = Window;
 
 	var _this = this;
@@ -20,6 +20,7 @@ function Pad(Window) {
 
 	this.isPlaying = false;
 	this.playAgain = false;
+  this.loop = loopEnabled;
 
 
 	this.apiPrefix = "https://hackathon.indabamusic.com/samples/";
@@ -128,6 +129,7 @@ Pad.prototype.addAudioProperties = function() {
 	    	//console.log("this.sample.play()");
 
 	    	var s = _this.context.createBufferSource();
+        s.loop = _this.loop;
 	    	s.buffer = _this.sample.buffer;
 	    	//s.connect(_this.context.destination);
 	    	s.connect(GLOBAL_VARS.panner);
@@ -136,6 +138,7 @@ Pad.prototype.addAudioProperties = function() {
 	        _this.playStart(_this);
 
 		    _this.isPlaying=true;
+        console.log(_this.bufferSourceNodes)
 
 			s.onended = function() {
 				//console.log("s.onended()");
@@ -147,7 +150,21 @@ Pad.prototype.addAudioProperties = function() {
 		    		_this.sample.play();
 		    	}
 		    }
-		}
+		  }
+      else {
+        // remove currently playing sample and play new one
+        this.sample.s.stop();
+
+        s.onended = function() {
+          _this.bufferSourceNodes.shift();
+          _this.playStop(_this);
+          _this.isPlaying=false;
+          if(_this.playAgain==true){
+            _this.playAgain=false;
+            _this.sample.play();
+          }
+        }
+      }
     }
 
     this.sample.stop = function() {
@@ -157,7 +174,6 @@ Pad.prototype.addAudioProperties = function() {
 		    _this.playStop(_this);
 	    	_this.isPlaying=false;
     	}
-
     }
 
 };
