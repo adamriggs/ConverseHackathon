@@ -71,8 +71,12 @@ PadController.prototype.getHotkeyCharacter = function(keyCodeObject) {
 
 PadController.prototype.stopAll = function() {
 	//console.log("PadController.stopAll()");
-	for(var i = 0; i < this.padCount; i++) {
-		this.padArray[i].stop();
+	for(var i = 0; i < this.loopPadCount; i++) {
+		this.loopPadArray[i].stop();
+	}
+
+	for(var i = 0; i < this.oneShotPadCount; i++) {
+		this.oneShotPadArray[i].stop();
 	}
 };
 
