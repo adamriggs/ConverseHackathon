@@ -70,6 +70,10 @@ var GLOBAL_VARS = {
     79: ['o', 14],
     80: ['p', 15],
   },
+  controlKeyCodes: {
+    // browser key code: [keyboard key, element in pad array]
+    16: 'shift'
+  },
   loopPadCharacters: [
     // browser key code: [keyboard key, element in pad array]
     '1',
