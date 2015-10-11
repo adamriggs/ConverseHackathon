@@ -33,8 +33,10 @@ PadController.prototype.drawLoopPads = function() {
 	for(var i = 0; i < this.loopPadCount; i++) {
 		var pad = new Pad(this.window);
 		this.loopPadArray.push(pad);
+		var hotkeyCharacter = this.getHotkeyCharacter(GLOBAL_VARS.loopPadCharacters[i]);
+		pad.$el.children('.hotkey-character').text(hotkeyCharacter);
 		this.$loopEl.append(pad.$el);
-		pad.setSampleID(this.sampleController.samples.loop[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples.loop[0])]);
+		pad.setSampleID(this.sampleController.samples.loop[this.sampleController.getRandomValueFromArray(this.sampleController.samples.loop)]);
 	}
 
 	this.handleWindowResize();
@@ -49,12 +51,22 @@ PadController.prototype.drawOneShotPads = function() {
 	for(var i = 0; i < this.oneShotPadCount; i++) {
 		var pad = new Pad(this.window);
 		this.oneShotPadArray.push(pad);
+		var hotkeyCharacter = this.getHotkeyCharacter(GLOBAL_VARS.oneShotPadCharacters[i]);
+		pad.$el.children('.hotkey-character').text(hotkeyCharacter);
 		this.$oneShotEl.append(pad.$el);
-		pad.setSampleID(this.sampleController.samples.one_shot[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples.one_shot[0])]);
+		pad.setSampleID(this.sampleController.samples.one_shot[this.sampleController.getRandomValueFromArray(this.sampleController.samples.one_shot)]);
 	}
 
 	this.handleWindowResize();
 
+};
+
+PadController.prototype.getHotkeyCharacter = function(keyCodeObject) {
+	for (var keyCode in keyCodeObject) {
+		if (keyCodeObject.hasOwnProperty(keyCode)) {
+			return keyCodeObject[keyCode];
+		}
+	}
 };
 
 PadController.prototype.stopAll = function() {
