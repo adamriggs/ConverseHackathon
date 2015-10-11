@@ -17,9 +17,9 @@ function LeapController() {
 
 				palmVect = _this.paramaterizeVector(hand.palmPosition);
 
-				panner.setPosition(palmVect[0], palmVect[1], palmVect[2]);
+				//panner.setPosition(palmVect[0], palmVect[1], palmVect[2]);
 				//panner.setPosition(palmVect[0], palmVect[1], .5);
-				console.log(palmVect[0], palmVect[1], palmVect[2]);
+				//console.log(palmVect[0], palmVect[1], palmVect[2]);
 
 				//panner.setOrientation(Math.cos(angle), -Math.sin(angle), 1);
 				//panner.connect(context.destination);
