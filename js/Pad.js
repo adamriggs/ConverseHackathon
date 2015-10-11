@@ -5,7 +5,7 @@ function Pad(Window) {
 
 	var _this = this;
 
-	this.$el = $("<div class='pad not-loaded'></div>");
+	this.$el = $("<div class='pad not-loaded'><div class='hotkey-character' /></div>");
 
 	this.context = GLOBAL_VARS.audioContext;
 	this.sample = {};

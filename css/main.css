@@ -87,6 +87,7 @@ hr {
   height: 100px;
   display: inline-block;
   margin: 5px;
+  position: relative;
 }
 
 #one-shot-pads {
@@ -101,6 +102,7 @@ hr {
 	height: 100px;
 	display: inline-block;
 	margin: 5px;
+  position: relative;
 }
 
 #loop-pads .pad.not-loaded, #one-shot-pads .pad.not-loaded {
@@ -109,6 +111,15 @@ hr {
 
 #loop-pads .pad.playing, #one-shot-pads .pad.playing {
   background-color: #889900;
+}
+
+#loop-pads .pad .hotkey-character, #one-shot-pads .pad .hotkey-character {
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  font-size: 18px;
+  text-transform: uppercase;
+  padding: 5px;
 }
 
 
