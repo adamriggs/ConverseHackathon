@@ -69,6 +69,8 @@ Pad.prototype.getSampleJSON = function() {
 Pad.prototype.clicked = function(This) {
 	//console.log("Pad.clicked()");
 	//console.log("isPlaying=="+This.isPlaying)
+
+	if(!This){This =this}
 	if(This.isPlaying==false){
 		This.play();
 	} else {

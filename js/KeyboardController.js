@@ -14,14 +14,14 @@ KeyboardController.prototype.handleKeyUpEvents = function() {
   $(document).on('keyup', function(event) {
     if (_this.loopKeyCodes[event.keyCode]) {
       var padElement = _this.loopKeyCodes[event.keyCode][1];
-      _this.padController.loopPadArray[padElement].play();
+      _this.padController.loopPadArray[padElement].clicked();
 
       return false;
     }
 
     if (_this.oneShotKeyCodes[event.keyCode]) {
       var padElement = _this.oneShotKeyCodes[event.keyCode][1];
-      _this.padController.oneShotPadArray[padElement].play();
+      _this.padController.oneShotPadArray[padElement].clicked();
 
       return false;
     }
