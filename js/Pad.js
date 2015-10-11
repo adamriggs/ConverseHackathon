@@ -127,7 +127,8 @@ Pad.prototype.addAudioProperties = function() {
 
 	    	var s = _this.context.createBufferSource();
 	    	s.buffer = _this.sample.buffer;
-	    	s.connect(_this.context.destination);
+	    	//s.connect(_this.context.destination);
+	    	s.connect(GLOBAL_VARS.panner);
 	        s.start(0);
 	    	_this.bufferSourceNodes.push(s);
 	        _this.playStart(_this);

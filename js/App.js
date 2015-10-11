@@ -42,6 +42,7 @@ function App(){
 
 
 	this.sampleController = new SampleController();
+	this.leapController = new LeapController();
 
 	this.$loopPads = $("#loop-pads");
 	this.$oneShotPads = $("#one-shot-pads");
