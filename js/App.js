@@ -17,7 +17,11 @@ function App(){
 	var Y = 0;
 	var angle = 0;
 
-	GLOBAL_VARS.audioContext = new AudioContext();
+	if(window.hasOwnProperty('AudioContext')){
+		GLOBAL_VARS.audioContext = new AudioContext()
+	} else {
+		GLOBAL_VARS.audioContext = new webkitAudioContext();
+	}
 
 	var context = GLOBAL_VARS.audioContext;
 	context.listener.setPosition(0,0,0);
