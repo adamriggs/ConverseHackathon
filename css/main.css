@@ -69,30 +69,46 @@ hr {
 
 #content h1 {
   font-size: 48px;
+  text-transform: uppercase;
+  font-style: italic;
+  width: 440px;
+  margin: 0 auto;
 }
 
 #loop-pads {
-
+  margin-bottom: 50px;
+  width: 440px;
+  margin: 0 auto 50px;
 }
 
 #loop-pads .pad {
-  background-color: #FFCB17;
-  width: 50px;
-  height: 50px;
+  background-color: #FFAA00;
+  width: 100px;
+  height: 100px;
   display: inline-block;
   margin: 5px;
 }
 
 #one-shot-pads {
-
+  margin-bottom: 50px;
+  width: 440px;
+  margin: 0 auto;
 }
 
 #one-shot-pads .pad {
-	background-color: #FFCB17;
-	width: 50px;
-	height: 50px;
+	background-color: #FFAA00;
+	width: 100px;
+	height: 100px;
 	display: inline-block;
 	margin: 5px;
+}
+
+#loop-pads .pad.not-loaded, #one-shot-pads .pad.not-loaded {
+  background-color: #FF3300;
+}
+
+#loop-pads .pad.playing, #one-shot-pads .pad.playing {
+  background-color: #889900;
 }
 
 
