@@ -36,7 +36,7 @@ PadController.prototype.drawLoopPads = function() {
 		var hotkeyCharacter = this.getHotkeyCharacter(GLOBAL_VARS.loopPadCharacters[i]);
 		pad.$el.children('.hotkey-character').text(hotkeyCharacter);
 		this.$loopEl.append(pad.$el);
-		pad.setSampleID(this.sampleController.samples.loop[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples.loop[0])]);
+		pad.setSampleID(this.sampleController.samples.loop[this.sampleController.getRandomValueFromArray(this.sampleController.samples.loop)]);
 	}
 
 	this.handleWindowResize();
@@ -54,7 +54,7 @@ PadController.prototype.drawOneShotPads = function() {
 		var hotkeyCharacter = this.getHotkeyCharacter(GLOBAL_VARS.oneShotPadCharacters[i]);
 		pad.$el.children('.hotkey-character').text(hotkeyCharacter);
 		this.$oneShotEl.append(pad.$el);
-		pad.setSampleID(this.sampleController.samples.one_shot[0][this.sampleController.getRandomValueFromArray(this.sampleController.samples.one_shot[0])]);
+		pad.setSampleID(this.sampleController.samples.one_shot[this.sampleController.getRandomValueFromArray(this.sampleController.samples.one_shot)]);
 	}
 
 	this.handleWindowResize();
