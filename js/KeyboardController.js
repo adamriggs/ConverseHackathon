@@ -12,8 +12,8 @@ function KeyboardController(padController) {
 KeyboardController.prototype.handleKeyUpEvents = function() {
   var _this = this;
 
-  $(document).on('keyup', function(event) {
-     if (_this.controlKeyCodes[event.keyCode]) {
+  $(document).on('keydown', function(event) {
+    if (_this.controlKeyCodes[event.keyCode]) {
       $('.stop_all').click();
 
       return false;

@@ -20,7 +20,7 @@ function Pad(Window, loopEnabled) {
 
 	this.isPlaying = false;
 	this.playAgain = false;
-  this.loop = loopEnabled;
+  	this.loop = loopEnabled;
 
 
 	this.apiPrefix = "https://hackathon.indabamusic.com/samples/";
@@ -129,7 +129,7 @@ Pad.prototype.addAudioProperties = function() {
 	    	//console.log("this.sample.play()");
 
 	    	var s = _this.context.createBufferSource();
-        s.loop = _this.loop;
+       		s.loop = _this.loop;
 	    	s.buffer = _this.sample.buffer;
 	    	//s.connect(_this.context.destination);
 	    	s.connect(GLOBAL_VARS.panner);
@@ -138,7 +138,7 @@ Pad.prototype.addAudioProperties = function() {
 	        _this.playStart(_this);
 
 		    _this.isPlaying=true;
-        console.log(_this.bufferSourceNodes)
+        	//console.log(_this.bufferSourceNodes);
 
 			s.onended = function() {
 				//console.log("s.onended()");
