@@ -103,25 +103,26 @@ hr {
 .pad .duration {
 	position: absolute;
 	bottom: 0px;
-	padding: 0 0 10px 5px;
+	padding: 0 0 5px 5px;
 	left: 0px;
 }
 
-#loop-pads .pad.not-loaded, #one-shot-pads .pad.not-loaded {
+.pad.not-loaded {
   background-color: #FF3300;
 }
 
-#loop-pads .pad.playing, #one-shot-pads .pad.playing {
+.pad.playing {
   background-color: #889900;
 }
 
-#loop-pads .pad .hotkey-character, #one-shot-pads .pad .hotkey-character {
+.pad .hotkey-character {
   bottom: 0;
   right: 0;
   position: absolute;
   font-size: 18px;
   text-transform: uppercase;
   padding: 5px;
+  line-height: 15px;
 }
 
 

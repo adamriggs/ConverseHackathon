@@ -69,9 +69,9 @@ Pad.prototype.getSampleJSON = function() {
 };
 
 Pad.prototype.displaySampleInfo = function() {
-	console.log(this.sampleJSON);
-	console.log(this.sampleJSON.song_name);
-	console.log("*****");
+	// console.log(this.sampleJSON);
+	// console.log(this.sampleJSON.song_name);
+	// console.log("*****");
 	this.$el.append("<p class='song-name'>"+this.sampleJSON.song_name+"</p>");
 	this.$el.append("<p class='duration'>"+this.sampleJSON.duration+"</p>");
 };
