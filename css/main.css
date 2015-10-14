@@ -81,28 +81,30 @@ hr {
   margin: 0 auto 50px;
 }
 
-#loop-pads .pad {
-  background-color: #FFAA00;
-  width: 100px;
-  height: 100px;
-  display: inline-block;
-  margin: 5px;
-  position: relative;
-}
-
 #one-shot-pads {
   margin-bottom: 50px;
   width: 440px;
   margin: 0 auto;
 }
 
-#one-shot-pads .pad {
-	background-color: #FFAA00;
-	width: 100px;
-	height: 100px;
-	display: inline-block;
-	margin: 5px;
+.pad {
+  background-color: #FFAA00;
+  width: 100px;
+  height: 100px;
+  display: inline-flex;
+  margin: 5px;
   position: relative;
+}
+
+.pad .song-name {
+	padding: 5px;
+}
+
+.pad .duration {
+	position: absolute;
+	bottom: 0px;
+	padding: 0 0 10px 5px;
+	left: 0px;
 }
 
 #loop-pads .pad.not-loaded, #one-shot-pads .pad.not-loaded {

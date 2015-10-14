@@ -63,8 +63,17 @@ Pad.prototype.getSampleJSON = function() {
         _this.sampleS3_key = _this.sampleJSON.s3_key;
         _this.sampleS3_key = _this.sampleS3_key.replace(".wav", ".mp3");
         _this.setSourceURL();
+        _this.displaySampleInfo();
     }
     request.send();
+};
+
+Pad.prototype.displaySampleInfo = function() {
+	console.log(this.sampleJSON);
+	console.log(this.sampleJSON.song_name);
+	console.log("*****");
+	this.$el.append("<p class='song-name'>"+this.sampleJSON.song_name+"</p>");
+	this.$el.append("<p class='duration'>"+this.sampleJSON.duration+"</p>");
 };
 
 Pad.prototype.clicked = function(This) {
@@ -83,7 +92,7 @@ Pad.prototype.clicked = function(This) {
 Pad.prototype.play = function() {
 	//console.log("Pad.play()");
 	this.sample.play();
-}
+};
 
 Pad.prototype.stop = function() {
 	//console.log("Pad.stop()");
